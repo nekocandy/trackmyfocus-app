@@ -4,3 +4,17 @@
 // nodeIntegration is set to true in webPreferences.
 // Use preload.js to selectively enable features
 // needed in the renderer process.
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface Window {
+	bridge: any;
+}
+
+console.log("hello from");
+
+window.bridge.setToken((event: any, token: string) => {
+	console.log({ event, token });
+	const params = new URLSearchParams(token);
+
+	console.log(params);
+});

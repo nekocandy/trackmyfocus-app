@@ -15,5 +15,17 @@
     "eslint": "^7.32.0",
     "typescript": "^4.8.3"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "build": {
+    "appId": "co.trackmyfocus.app",
+    "protocols": {
+      "name": "electron-deep-linking",
+      "schemes": ["trackmyfocus"]
+    },
+    "mac": {
+      "category": "public.app-category.Reference"
+    },
+    "win": {
+    }
+  }
 }
