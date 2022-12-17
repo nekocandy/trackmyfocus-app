@@ -1,4 +1,5 @@
 import { app, BrowserWindow, dialog } from "electron";
+import * as isDev from "electron-is-dev";
 import * as path from "path";
 
 if (process.defaultApp) {
@@ -14,7 +15,13 @@ let mainWindow: BrowserWindow;
 function createWindow() {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
-		height: 600,
+		height: 100,
+		minWidth: 400,
+		maxWidth: 400,
+		resizable: false,
+		minimizable: false,
+		autoHideMenuBar: true,
+		alwaysOnTop: true,
 		webPreferences: {
 			nodeIntegration: true,
 			preload: path.join(__dirname, "preload.js"),
@@ -22,11 +29,17 @@ function createWindow() {
 		width: 800,
 	});
 
-	// and load the index.html of the app.
-	mainWindow.loadFile(path.join(__dirname, "../dist/", "index.html"));
+	mainWindow.loadURL(
+		isDev
+			? "http://localhost:5173"
+			: `file://${path.join(__dirname, "../build/index.html")}`
+	);
 
 	// Open the DevTools.
-	mainWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools({
+		mode: "undocked",
+	});
+	mainWindow.setAlwaysOnTop(true);
 }
 
 const gotTheLock = app.requestSingleInstanceLock();

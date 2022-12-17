@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var electron_1 = require("electron");
+var isDev = require("electron-is-dev");
 var path = require("path");
 if (process.defaultApp) {
     electron_1.app.setAsDefaultProtocolClient("trackmyfocus", process.execPath, [
@@ -14,17 +15,27 @@ var mainWindow;
 function createWindow() {
     // Create the browser window.
     mainWindow = new electron_1.BrowserWindow({
-        height: 600,
+        height: 100,
+        minWidth: 400,
+        maxWidth: 400,
+        resizable: false,
+        minimizable: false,
+        autoHideMenuBar: true,
+        alwaysOnTop: true,
         webPreferences: {
             nodeIntegration: true,
             preload: path.join(__dirname, "preload.js")
         },
         width: 800
     });
-    // and load the index.html of the app.
-    mainWindow.loadFile(path.join(__dirname, "../dist/", "index.html"));
+    mainWindow.loadURL(isDev
+        ? "http://localhost:5173"
+        : "file://".concat(path.join(__dirname, "../build/index.html")));
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools({
+        mode: "undocked"
+    });
+    mainWindow.setAlwaysOnTop(true);
 }
 var gotTheLock = electron_1.app.requestSingleInstanceLock();
 if (!gotTheLock) {
