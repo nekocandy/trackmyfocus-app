@@ -79,7 +79,7 @@ export default function HomePage(): ReactElement {
 			<div className="h-full flex items-center justify-center">
 				<a
 					onClick={loginWithBrowserClicked}
-					href="http://localhost:4432/auth/token"
+					href="https://trackmyfocus.co/auth/token"
 					target="_blank"
 					className="text-center w-full bg-teal-500/20 hover:(bg-teal-500/30) px-4 py-2 rounded"
 				>
