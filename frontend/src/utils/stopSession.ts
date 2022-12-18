@@ -8,7 +8,7 @@ export default async function stopSession(sessionId: string): Promise<void> {
 		return;
 	}
 
-	const res = await fetch("http://localhost:2047/api/sessions/stop", {
+	const res = await fetch("https://api.trackmyfocus.co/api/sessions/stop", {
 		method: "POST",
 		body: JSON.stringify({
 			sessionId,

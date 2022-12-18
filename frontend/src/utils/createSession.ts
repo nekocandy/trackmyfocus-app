@@ -10,7 +10,7 @@ async function createSession(sessionName: string) {
 		return;
 	}
 
-	const res = await fetch("http://localhost:2047/api/sessions/create", {
+	const res = await fetch("https://api.trackmyfocus.co/api/sessions/create", {
 		method: "POST",
 		body: JSON.stringify({
 			sessionName,

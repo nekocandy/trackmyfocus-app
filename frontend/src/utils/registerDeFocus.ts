@@ -10,7 +10,7 @@ export default async function registerDeFocus(
 		return;
 	}
 
-	const res = await fetch("http://localhost:2047/api/sessions/record", {
+	const res = await fetch("https://api.trackmyfocus.co/api/sessions/record", {
 		method: "POST",
 		body: JSON.stringify({
 			sessionId,
