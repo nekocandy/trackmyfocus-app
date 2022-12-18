@@ -41,6 +41,10 @@ export default function HomePage(): ReactElement {
 	};
 
 	useEffect(() => {
+		const localToken = localStorage.getItem("token");
+		if (localToken) {
+			setSignedIn(true);
+		}
 		listener();
 	}, []);
 
@@ -59,7 +63,10 @@ export default function HomePage(): ReactElement {
 						<Bulb size={20} strokeWidth={2} className="text-orange-400" />
 						Prompt Me
 					</button>
-					<button className="font-bol flex items-center justify-center gap-1  text-teal-400 bg-teal-500/20 hover:(bg-teal-500/30) px-4 py-1 rounded">
+					<button
+						onClick={() => navigate("/tap")}
+						className="font-bol flex items-center justify-center gap-1  text-teal-400 bg-teal-500/20 hover:(bg-teal-500/30) px-4 py-1 rounded"
+					>
 						<HandTwoFingers
 							size={20}
 							strokeWidth={2}
