@@ -1,22 +1,27 @@
 module.exports = {
-  packagerConfig: {},
-  rebuildConfig: {},
-  makers: [
-    {
-      name: '@electron-forge/maker-squirrel',
-      config: {},
-    },
-    {
-      name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
-    },
-    {
-      name: '@electron-forge/maker-deb',
-      config: {},
-    },
-    {
-      name: '@electron-forge/maker-rpm',
-      config: {},
-    },
-  ],
+	packagerConfig: {
+		icon: './frontend/public/tmf.ico',
+	},
+	rebuildConfig: {},
+	makers: [
+		{
+			name: '@electron-forge/maker-squirrel',
+			config: {
+				iconUrl: "https://trackmyfocus.co/tmf.ico",
+				setupIcon: "./frontend/public/tmf.ico",
+			},
+		},
+		// {
+		//   name: '@electron-forge/maker-zip',
+		//   platforms: ['darwin'],
+		// },
+		// {
+		//   name: '@electron-forge/maker-deb',
+		//   config: {},
+		// },
+		// {
+		//   name: '@electron-forge/maker-rpm',
+		//   config: {},
+		// },
+	],
 };
