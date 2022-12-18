@@ -77,7 +77,7 @@ export default function HomePage(): ReactElement {
 					onClick={loginWithBrowserClicked}
 					href="http://localhost:4432/auth/token"
 					target="_blank"
-					className="inline-flex w-full bg-teal-500/20 hover:(bg-teal-500/30) px-4 py-2 rounded"
+					className="text-center w-full bg-teal-500/20 hover:(bg-teal-500/30) px-4 py-2 rounded"
 				>
 					Login With Browser
 				</a>

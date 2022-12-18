@@ -4,10 +4,5 @@
 // nodeIntegration is set to true in webPreferences.
 // Use preload.js to selectively enable features
 // needed in the renderer process.
-console.log("hello from");
-window.bridge.setToken(function (event, token) {
-    console.log({ event: event, token: token });
-    var params = new URLSearchParams(token);
-    console.log(params);
-});
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 //# sourceMappingURL=renderer.js.map

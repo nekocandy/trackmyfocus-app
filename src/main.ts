@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog } from "electron";
+import { app, BrowserWindow, dialog, shell } from "electron";
 import * as isDev from "electron-is-dev";
 import * as path from "path";
 
@@ -40,6 +40,13 @@ function createWindow() {
 		mode: "undocked",
 	});
 	mainWindow.setAlwaysOnTop(true);
+
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+		shell.openExternal(url);
+		return { action: 'deny' };
+	});
 }
 
 const gotTheLock = app.requestSingleInstanceLock();
@@ -89,12 +96,12 @@ if (!gotTheLock) {
 }
 
 // Handle the protocol. In this case, we choose to show an Error Box.
-app.on("open-url", (event, url) => {
-	event.preventDefault();
-	console.log("open-url event: " + url);
+// app.on("open-url", (event, url) => {
+// 	event.preventDefault();
+// 	console.log("open-url event: " + url);
 
-	dialog.showErrorBox("open-url", `You arrived from: ${url}`);
-});
+// 	dialog.showErrorBox("open-url", `You arrived from: ${url}`);
+// });
 
 app.on("window-all-closed", () => {
 	if (process.platform !== "darwin") {

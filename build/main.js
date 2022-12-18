@@ -36,13 +36,20 @@ function createWindow() {
         mode: "undocked"
     });
     mainWindow.setAlwaysOnTop(true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    mainWindow.webContents.setWindowOpenHandler(function (_a) {
+        var url = _a.url;
+        electron_1.shell.openExternal(url);
+        return { action: 'deny' };
+    });
 }
 var gotTheLock = electron_1.app.requestSingleInstanceLock();
 if (!gotTheLock) {
     electron_1.app.quit();
 }
 else {
-    electron_1.app.on("second-instance", function (event, commandLine, workingDirectory) {
+    electron_1.app.on("second-instance", function (event, commandLine) {
         if (mainWindow) {
             if (mainWindow.isMinimized())
                 mainWindow.restore();
@@ -74,11 +81,11 @@ else {
     });
 }
 // Handle the protocol. In this case, we choose to show an Error Box.
-electron_1.app.on("open-url", function (event, url) {
-    event.preventDefault();
-    console.log("open-url event: " + url);
-    electron_1.dialog.showErrorBox("open-url", "You arrived from: ".concat(url));
-});
+// app.on("open-url", (event, url) => {
+// 	event.preventDefault();
+// 	console.log("open-url event: " + url);
+// 	dialog.showErrorBox("open-url", `You arrived from: ${url}`);
+// });
 electron_1.app.on("window-all-closed", function () {
     if (process.platform !== "darwin") {
         electron_1.app.quit();
