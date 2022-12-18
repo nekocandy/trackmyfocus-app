@@ -19,7 +19,7 @@ function createWindow() {
 		maxWidth: 400,
 		resizable: false,
 		minimizable: false,
-		// autoHideMenuBar: true,
+		autoHideMenuBar: true,
 		alwaysOnTop: true,
 		webPreferences: {
 			nodeIntegration: true,
@@ -27,7 +27,7 @@ function createWindow() {
 		},
 	});
 
-	mainWindow.loadURL(`file://${path.join(__dirname, "../dist/index.html")}`);
+	mainWindow.loadURL("https://app.trackmyfocus.co");
 	mainWindow.setAlwaysOnTop(true);
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment

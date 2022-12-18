@@ -1,6 +1,12 @@
 module.exports = {
 	packagerConfig: {
 		icon: './frontend/public/tmf.ico',
+		"protocols": [
+			{
+				"name": "TrackMyFocus",
+				"schemes": ["trackmyfocus"]
+			}
+		]
 	},
 	rebuildConfig: {},
 	makers: [
