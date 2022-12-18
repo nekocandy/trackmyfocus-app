@@ -1,5 +1,4 @@
 import { app, BrowserWindow, dialog, shell } from "electron";
-import * as isDev from "electron-is-dev";
 import * as path from "path";
 
 if (process.defaultApp) {
@@ -20,25 +19,15 @@ function createWindow() {
 		maxWidth: 400,
 		resizable: false,
 		minimizable: false,
-		autoHideMenuBar: true,
+		// autoHideMenuBar: true,
 		alwaysOnTop: true,
 		webPreferences: {
 			nodeIntegration: true,
 			preload: path.join(__dirname, "preload.js"),
 		},
-		width: 800,
 	});
 
-	mainWindow.loadURL(
-		isDev
-			? "http://localhost:5173"
-			: `file://${path.join(__dirname, "../build/index.html")}`
-	);
-
-	// Open the DevTools.
-	mainWindow.webContents.openDevTools({
-		mode: "undocked",
-	});
+	mainWindow.loadURL(`file://${path.join(__dirname, "../dist/index.html")}`);
 	mainWindow.setAlwaysOnTop(true);
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment

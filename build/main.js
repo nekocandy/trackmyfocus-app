@@ -1,7 +1,6 @@
 "use strict";
 exports.__esModule = true;
 var electron_1 = require("electron");
-var isDev = require("electron-is-dev");
 var path = require("path");
 if (process.defaultApp) {
     electron_1.app.setAsDefaultProtocolClient("trackmyfocus", process.execPath, [
@@ -20,21 +19,14 @@ function createWindow() {
         maxWidth: 400,
         resizable: false,
         minimizable: false,
-        autoHideMenuBar: true,
+        // autoHideMenuBar: true,
         alwaysOnTop: true,
         webPreferences: {
             nodeIntegration: true,
             preload: path.join(__dirname, "preload.js")
-        },
-        width: 800
+        }
     });
-    mainWindow.loadURL(isDev
-        ? "http://localhost:5173"
-        : "file://".concat(path.join(__dirname, "../build/index.html")));
-    // Open the DevTools.
-    mainWindow.webContents.openDevTools({
-        mode: "undocked"
-    });
+    mainWindow.loadURL("file://".concat(path.join(__dirname, "../dist/index.html")));
     mainWindow.setAlwaysOnTop(true);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
