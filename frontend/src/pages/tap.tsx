@@ -1,19 +1,25 @@
 import { ReactElement, useEffect, useState } from "react";
-import { ArrowRight, Cross, HandTwoFingers } from "tabler-icons-react";
+import { ArrowRight, Cross, HandTwoFingers, MoodLookLeft } from "tabler-icons-react";
 import createSession from "../utils/createSession";
+import registerDeFocus from "../utils/registerDeFocus";
 
 export default function TapMe(): ReactElement {
 	const [name, setName] = useState("");
 	const [nameCompleted, setNameCompleted] = useState(false);
+	const [sessionId, setSessionId] = useState<string | null>(null);
 
 	const initSession = async () => {
-		// const sessionDetails = await createSession();
-		// console.log(sessionDetails);
+		const sessionDetails = await createSession(name);
+		console.log(sessionDetails);
+		setSessionId(sessionDetails.id);
 	};
 
 	useEffect(() => {
+		if (!nameCompleted) return;
+		if (sessionId) return;
+
 		initSession();
-	}, []);
+	}, [nameCompleted]);
 
 	if (nameCompleted) {
 		return (
@@ -24,8 +30,12 @@ export default function TapMe(): ReactElement {
 							<Cross size={20} strokeWidth={2} className="text-orange-400" />
 							Stop
 						</button>
-						<button className="font-bol flex items-center justify-center gap-1  text-teal-400 bg-teal-500/20 hover:(bg-teal-500/30) px-4 py-1 rounded">
-							<HandTwoFingers
+						<button
+							// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+							onClick={() => registerDeFocus(sessionId!)}
+							className="font-bol flex items-center justify-center gap-1  text-teal-400 bg-teal-500/20 hover:(bg-teal-500/30) px-4 py-1 rounded"
+						>
+							<MoodLookLeft
 								size={20}
 								strokeWidth={2}
 								className="text-teal-400"

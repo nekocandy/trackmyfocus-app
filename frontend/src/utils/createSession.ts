@@ -10,13 +10,14 @@ async function createSession(sessionName: string) {
 		return;
 	}
 
-	const res = await fetch("http://localhost:2047", {
+	const res = await fetch("http://localhost:2047/api/sessions/create", {
 		method: "POST",
 		body: JSON.stringify({
 			sessionName,
 		}),
 		headers: {
 			Authorization: `Bearer ${token}`,
+			"Content-Type": "application/json",
 		},
 	}).then((r) => r.json());
 
