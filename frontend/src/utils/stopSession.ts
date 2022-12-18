@@ -1,6 +1,4 @@
-export default async function registerDeFocus(
-	sessionId: string
-): Promise<void> {
+export default async function stopSession(sessionId: string): Promise<void> {
 	const token = localStorage.getItem("token");
 
 	if (!token) {
@@ -20,8 +18,6 @@ export default async function registerDeFocus(
 			"Content-Type": "application/json",
 		},
 	}).then((r) => r.json());
-
-    console.log(res)
 
 	return res;
 }

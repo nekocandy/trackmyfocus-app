@@ -1,7 +1,8 @@
 import { ReactElement, useEffect, useState } from "react";
-import { ArrowRight, Cross, HandTwoFingers, MoodLookLeft } from "tabler-icons-react";
+import { ArrowRight, ClockStop, Cross, MoodLookLeft } from "tabler-icons-react";
 import createSession from "../utils/createSession";
 import registerDeFocus from "../utils/registerDeFocus";
+import stopSession from "../utils/stopSession";
 
 export default function TapMe(): ReactElement {
 	const [name, setName] = useState("");
@@ -10,7 +11,6 @@ export default function TapMe(): ReactElement {
 
 	const initSession = async () => {
 		const sessionDetails = await createSession(name);
-		console.log(sessionDetails);
 		setSessionId(sessionDetails.id);
 	};
 
@@ -21,13 +21,21 @@ export default function TapMe(): ReactElement {
 		initSession();
 	}, [nameCompleted]);
 
-	if (nameCompleted) {
+	if (sessionId) {
 		return (
 			<div>
 				<div className="h-full flex items-center justify-center">
 					<div className="w-full grid grid-cols-2 gap-4">
-						<button className="flex items-center justify-center gap-1  text-orange-400 bg-orange-400/20 hover:(bg-orange-500/30) px-4 py-1 rounded">
-							<Cross size={20} strokeWidth={2} className="text-orange-400" />
+						<button
+							// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+							onClick={() => stopSession(sessionId!)}
+							className="flex items-center justify-center gap-1  text-orange-400 bg-orange-400/20 hover:(bg-orange-500/30) px-4 py-1 rounded"
+						>
+							<ClockStop
+								size={20}
+								strokeWidth={2}
+								className="text-orange-400"
+							/>
 							Stop
 						</button>
 						<button

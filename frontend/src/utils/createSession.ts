@@ -21,7 +21,6 @@ async function createSession(sessionName: string) {
 		},
 	}).then((r) => r.json());
 
-	console.log(res);
 	return res;
 }
 

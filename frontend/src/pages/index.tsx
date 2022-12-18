@@ -16,9 +16,6 @@ export default function HomePage(): ReactElement {
 	const [token, setToken] = useState<string | null>(null);
 	const navigate = useNavigate();
 
-	const wait = (seconds: number) =>
-		new Promise((resolve) => setTimeout(resolve, seconds * 1000));
-
 	const listener = () => {
 		console.log("hello from");
 

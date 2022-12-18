@@ -21,7 +21,5 @@ export default async function registerDeFocus(
 		},
 	}).then((r) => r.json());
 
-    console.log(res)
-
 	return res;
 }
